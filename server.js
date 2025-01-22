@@ -37,3 +37,27 @@ const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Virtual Assistant API is running on http://localhost:${PORT}`);
 });
+
+app.get('/assistant/greet', (req, res) => {
+  const name = req.query.name;
+  const date = new Date();
+  const day = date.getDay();
+  let dayMessage = '';
+  let WelcomeMessage = `Hello, ${name}! Welcome to our assistant app!`;
+  switch(day){
+    case 1:
+      dayMessage = "Happy Monday! Start your week with energy!";
+      break;
+    case 5:
+      dayMessage = "It's Friday! The weekend is near!";
+      break;
+    default:
+      dayMessage = "Have a wonderful day!";
+  }
+
+  res.json({
+    welcomeMessage: WelcomeMessage,
+    dayMessage: dayMessage
+  })
+
+});
